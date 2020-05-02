@@ -32,8 +32,8 @@ class Countrycard extends StatelessWidget {
                   SizedBox(height: 32),
                   Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
-                    child: Image.network(
-                      this.flag,
+                    child: Image.asset(
+                      this.flag, package: 'country_icons'
                     ),
                   ),
                   SizedBox(height: 10),

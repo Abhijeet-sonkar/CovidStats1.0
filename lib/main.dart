@@ -2,8 +2,7 @@ import 'package:corona/button.dart';
 import 'package:corona/country.dart';
 
 import 'package:corona/piechart.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 import 'package:flutter/material.dart';
 
@@ -30,20 +29,9 @@ class Mainpage extends StatefulWidget {
 }
 
 class _MainpageState extends State<Mainpage> {
-  List<dynamic> data;
-
-  Future<String> getData() async {
-    var response = await http.get(
-        Uri.encodeFull('https://corona.lmao.ninja/v2/countries?sort=cases'),
-        headers: {"Accept": "application/json"});
-    setState(() {
-      data = json.decode(response.body);
-    });
-    print(data[0]['deaths']);
-  }
 
   void initState() {
-    getData();
+   
 
     super.initState();
   }
@@ -103,7 +91,7 @@ class _MainpageState extends State<Mainpage> {
                           topLeft: Radius.circular(25.0))),
                   height: MediaQuery.of(context).size.height * 0.40,
                   width: MediaQuery.of(context).size.width * 0.92,
-                  child: Country(data),
+                  child: Country(),
                 ),
               ),
               Align(
@@ -120,8 +108,8 @@ class _MainpageState extends State<Mainpage> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('To get Live Update'),
-                        content: const Text('Connect to a network and tap on refresh button at bottom left'),
+                        title: Text('Info'),
+                        content: const Text('Stats as on 2nd May 2020'),
                         actions: <Widget>[
                           FlatButton(
                             child: Text('Ok'),
@@ -143,11 +131,7 @@ class _MainpageState extends State<Mainpage> {
                         ),
                         child: Icon(Icons.info_outline))),
               ),
-              Positioned(
-                left: 30,
-                bottom: 32,
-                child: GestureDetector(onTap: getData, child: Icon(Icons.sync)),
-              )
+            
             ],
           ),
         ));
